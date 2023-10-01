@@ -1,0 +1,26 @@
+
+
+\documentclass{article}
+\author{Rylan W. Yancey}
+\date{10/1/2023}
+\title{Div Operator}
+\begin{document}
+    \maketitle
+    \section*{Definition \& Gradient}
+        The Division Operator is defined as $f(u, v) = \frac{u}{v}$. To find the gradient w.r.t x and y, we will
+        use the quotient rule of derivatives, which is defined as:
+
+        $$\frac{\delta}{\delta{x}}(\frac{u}{v}) = \frac{(u\frac{\delta}{\delta{x}})v - u(v\frac{\delta}{\delta{x}})}{v^2}$$
+
+        To find the gradient w.r.t u, we will set u as our x and treat v as constant, which gives us the following:
+
+        $$\frac{\delta}{\delta{u}}(\frac{u}{v}) = \frac{v\frac{\delta{u}}{\delta{u}} - u\frac{\delta{v}}{\delta{u}}}{v^2} 
+        = \frac{v - u\frac{0}{\delta{u}}}{v^2} = \frac{v}{v^2} = \frac{1}{v}$$
+
+        To find the gradient w.r.t v, we will set v as our x and treat u as constant, which gives us the following:
+
+        $$\frac{\delta}{\delta{v}}(\frac{u}{v}) = \frac{v\frac{\delta{u}}{\delta{v}} - u\frac{\delta{v}}{\delta{v}}}{v^2} 
+        = \frac{v\frac{0}{\delta{v}} - u}{v^2} = -\frac{u}{v^2}$$
+
+        Therefore, we can say that the gradient w.r.t u is $\frac{1}{v}$, and the gradient w.r.t v is $-\frac{u}{v^2}$.
+\end{document}
