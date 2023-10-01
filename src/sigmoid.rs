@@ -5,7 +5,7 @@ use ndarray::{Array, Dimension, Zip};
 /// 
 /// ONNX definition: https://onnx.ai/onnx/operators/onnx__Sigmoid.html#sigmoid
 /// 
-/// Computes Bi = 1. / (1. + e^-Ai)
+/// Computes Bi = 1. / (1. + e^-Ai).
 /// 
 /// - A: The Input Array
 /// - B: The Output Array
