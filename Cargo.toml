@@ -6,3 +6,4 @@ edition = "2021"
 [dependencies]
 ndarray = { version = "0.15.6", features = ["blas"] }
 ndarray-stats = "0.5.1"
+num-traits = "0.2.16"

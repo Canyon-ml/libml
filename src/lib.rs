@@ -6,6 +6,8 @@ pub use add::{
     add_wrt_b,
 };
 
+mod batch_norm;
+
 mod div;
 pub use div::{
     div,
@@ -19,6 +21,8 @@ pub use matmul::{
     matmul_wrt_a,
     matmul_wrt_b,
 };
+
+mod max_pool;
 
 mod mul;
 pub use mul::{

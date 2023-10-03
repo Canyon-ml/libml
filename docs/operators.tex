@@ -1,0 +1,158 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+\title{ML Operators}
+\author{LibML Team}
+\date{10/1/2023}
+\begin{document}
+    \maketitle
+    \section*{Contributors}
+        \begin{itemize}
+            \item Rylan Yancey
+        \end{itemize}
+    \section*{Acknowledgements}
+        \begin{itemize}
+            \item Michael Percy
+        \end{itemize}
+    \section*{Introduction}
+        This document formally defines the operators libml implements and their gradients. 
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    \section{Add}
+        The Addition Operator is defined as $f(u,v) = u + v$. To find the gradient w.r.t u and v, 
+        we will use the sum rule, which is defined as: 
+
+        $$\frac{\delta}{\delta{x}}(u + v) = \frac{\delta{u}}{\delta{x}} + \frac{\delta{v}}{\delta{x}}$$
+
+        To find the gradient w.r.t u, we will set u as our x and treat v as a constant, 
+        which gives us the following:
+
+        $$\frac{\delta}{\delta{u}}(u + v) = \frac{\delta{u}}{\delta{u}} + \frac{\delta{v}}{\delta{u}} = 1$$
+
+        To find the gradient w.r.t v, we will set v as our x and treat u as a constant, 
+        which gives us the following:
+
+        $$\frac{\delta}{\delta{v}}(u + v) = \frac{\delta{u}}{\delta{v}} + \frac{\delta{v}}{\delta{v}} = 1$$
+
+        Therefore, we can say that the gradient w.r.t u is 1, and the gradient w.r.t v is 1.
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    \section{Div}
+        The Division Operator is defined as $f(u, v) = \frac{u}{v}$. To find the gradient w.r.t x and y, we will
+        use the quotient rule of derivatives, which is defined as:
+
+        $$\frac{\delta}{\delta{x}}(\frac{u}{v}) = \frac{(u\frac{\delta}{\delta{x}})v - u(v\frac{\delta}{\delta{x}})}{v^2}$$
+
+        To find the gradient w.r.t u, we will set u as our x and treat v as constant, which gives us the following:
+
+        $$\frac{\delta}{\delta{u}}(\frac{u}{v}) = \frac{v\frac{\delta{u}}{\delta{u}} - u\frac{\delta{v}}{\delta{u}}}{v^2} 
+        = \frac{v - u\frac{0}{\delta{u}}}{v^2} = \frac{v}{v^2} = \frac{1}{v}$$
+
+        To find the gradient w.r.t v, we will set v as our x and treat u as constant, which gives us the following:
+
+        $$\frac{\delta}{\delta{v}}(\frac{u}{v}) = \frac{v\frac{\delta{u}}{\delta{v}} - u\frac{\delta{v}}{\delta{v}}}{v^2} 
+        = \frac{v\frac{0}{\delta{v}} - u}{v^2} = -\frac{u}{v^2}$$
+
+        Therefore, we can say that the gradient w.r.t u is $\frac{1}{v}$, and the gradient w.r.t v is $-\frac{u}{v^2}$.
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    \section{Matmul}
+        When A is an M x N matrix, B is an N x P matrix, and C is an M x P matrix, 
+        the product AB for an element in C at some $i,j$ is defined as: 
+        $$C_{ij} = \sum_{k=0}^{N} A_{ik}B_{kj}$$
+        Visually, this is the vector product of row $i$ in A and column $j$ in B. Lets' begin by finding
+        the derivative of the vector product, defined as.  When A is a M x 1 vector, and B is an M x 1 vector, the vector product
+        is defined as: 
+        $$\sum_{i=0}^{M} A_i B_i$$
+        To find the gradient, we will make use of the sum rule and the product rule. 
+        $$\frac{\delta}{\delta{X}}\sum_{i=0}^{M} \frac{\delta}{\delta{X_i}}(B_i (A_i \frac{\delta}{\delta{X_i}}) + A_i (B_i \frac{\delta}{\delta{X_i}}))$$
+        To find the gradient w.r.t. A, we will substitute X as A. 
+        $$\frac{\delta}{\delta{A}}\sum_{i=0}^{M} \frac{\delta}{\delta{A_i}}(B_i\frac{\delta{A_i}}{\delta{A_i}} + A_i\frac{\delta{B_i}}{\delta{A_i}})$$
+        We now distribute $\frac{\delta}{\delta{A_i}}$ and simplify. 
+        $$\sum_{i=0}^{M} B_i\frac{\delta{A_i}}{\delta{A_i}} + \sum_{i=0}^{M} A_i\frac{\delta{B_i}}{\delta{A_i}} = 
+        \sum_{i=0}^{M} B_i + \sum_{i=0}^{M} 0 = \sum_{i=0}^{M} B_i$$
+        Therefore, the gradient of the vector product with respect to A is the sum of the elements of B. The same logic is true for the gradient w.r.t.
+        B, which is the sum of the elements of A. Applying this to the definition of an element of C in matrix multiplication, we can say that the
+        gradient of $C_{ij}$ w.r.t A is the sum of the elements in column $B_j$, and the gradient w.r.t. B is the sum of the elements in row $A_i$.
+        For the purposes of gradients, we can conclude that the gradient of C w.r.t. A is $B^T$, and the gradient of C w.r.t. B. is $A^T$.
+        $$\frac{\delta}{\delta{A}}(AB) = B^T$$
+        $$\frac{\delta}{\delta{B}}(AB) = A^T$$
+        We get $B^T$ and $A^T$ becuase it is convention when working with gradients to transpose the derivatives of matrix multiplication. Under the
+        jacobian convention, this is not so.
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    \section{Mul}
+        The Multiplication Operator is defined as $f(u, v) = uv$. To find the gradient w.r.t 
+        u and v, we will use the product rule of derivatives, which is defined as:
+
+        $$\frac{\delta}{\delta{x}}(uv) = v\frac{\delta{u}}{\delta{x}} + u\frac{\delta{v}}{\delta{x}}$$
+
+        To find the gradient w.r.t u, we will set u as our x and treat v as a constant, 
+        which gives us the following:
+
+        $$\frac{\delta}{\delta{u}}(uv) = v\frac{\delta{u}}{\delta{u}} + u\frac{\delta{v}}{\delta{u}} = v + u\frac{0}{\delta{u}} = v$$
+
+        To find the gradient w.r.t v, simply do the same, this time setting v as x and treat u as constant.
+
+        $$\frac{\delta}{\delta{v}}(uv) = v\frac{\delta{u}}{\delta{v}} + u\frac{\delta{u}}{\delta{u}} = v\frac{0}{\delta{v}} + u = u$$
+
+        Therefore, we can say that the gradient w.r.t u is v, and the gradient w.r.t v is u. 
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    \section{Relu}
+        The Rectified Linear Unit function is defined as follows:
+        \[ \begin{cases} 
+            x & x > 0 \\
+            0 & otherwise
+        \end{cases}
+        \]
+        To find the gradient w.r.t. x, we use the gradient of each case. If $x > 0$, the gradient is 1. Otherwise, the gradient is 0.
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    \section{Sigmoid}
+        The Sigmoid function is defined as $\sigma(x) = \frac{1}{1+e^{-x}}$ To find the gradient, we will apply the chain rule and simplify.
+        \begin{align}
+            \dfrac{d}{dx} \sigma(x) &= \dfrac{d}{dx} \left[ \dfrac{1}{1 + e^{-x}} \right]\\
+            &= \dfrac{d}{dx} \left( 1 + \mathrm{e}^{-x} \right)^{-1} \\
+            &= -(1 + e^{-x})^{-2}(-e^{-x}) \\
+            &= \dfrac{e^{-x}}{\left(1 + e^{-x}\right)^2} \\
+            &= \dfrac{1}{1 + e^{-x}\ } \cdot \dfrac{e^{-x}}{1 + e^{-x}}  \\
+            &= \dfrac{1}{1 + e^{-x}\ } \cdot \dfrac{(1 + e^{-x}) - 1}{1 + e^{-x}}  \\
+            &= \dfrac{1}{1 + e^{-x}\ } \cdot \left( \dfrac{1 + e^{-x}}{1 + e^{-x}} - \dfrac{1}{1 + e^{-x}} \right) \\
+            &= \dfrac{1}{1 + e^{-x}\ } \cdot \left( 1 - \dfrac{1}{1 + e^{-x}} \right) \\
+            &= \sigma(x) \cdot (1 - \sigma(x))
+        \end{align}
+    Therefore, we say that the gradient of the sigmoid function with respect to x is $\sigma(x) \cdot (1-\sigma(x))$.
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    \section{Softmax}
+        The Softmax Function is defined as follows:
+        $$\sigma(\vec z)_i = \frac{e^{z_i}}{\sum_{j=0}^{K} e^{z_j}}$$
+        Z is some vector of length K. 
+
+        Not sure how to write this gracefully so for now heres some links:
+
+        https://www.mldawn.com/the-derivative-of-softmaxz-function-w-r-t-z/
+        
+        https://eli.thegreenplace.net/2016/the-softmax-function-and-its-derivative
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}  
+    \section{Sub}
+        The Subtraction Operator is defined as $f(u,v) = u - v$. To find the gradient w.r.t u and v, 
+        we will use the subtraction rule, which is defined as: 
+    
+        $$\frac{\delta}{\delta{x}}(u - v) = \frac{\delta{u}}{\delta{x}} - \frac{\delta{v}}{\delta{x}}$$
+    
+        To find the gradient w.r.t u, we will set u as our x and treat v as a constant, 
+        which gives us the following:
+    
+        $$\frac{\delta}{\delta{u}}(u - v) = \frac{\delta{u}}{\delta{u}} - \frac{\delta{v}}{\delta{u}} = 1$$
+    
+        To find the gradient w.r.t v, we will set v as our x and treat u as a constant, 
+        which gives us the following:
+    
+        $$\frac{\delta}{\delta{v}}(u - v) = \frac{\delta{u}}{\delta{v}} - \frac{\delta{v}}{\delta{v}} = -1$$
+    
+        Therefore, we can say that the gradient w.r.t u is 1, and the gradient w.r.t v is -1. 
+
+\end{document}
