@@ -8,6 +8,12 @@ pub use add::{
 
 mod batch_norm;
 
+mod cos;
+pub use cos::{
+    cos,
+    cos_wrt_a,
+};
+
 mod div;
 pub use div::{
     div,
@@ -42,6 +48,12 @@ mod sigmoid;
 pub use sigmoid::{
     sigmoid, 
     sigmoid_wrt_a, 
+};
+
+mod sin;
+pub use sin::{
+    sin,
+    sin_wrt_a,
 };
 
 mod softmax;
