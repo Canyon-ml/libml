@@ -14,6 +14,8 @@ pub use add::{
 
 mod batch_norm;
 
+mod conv;
+
 mod cos;
 pub use cos::{
     cos,
