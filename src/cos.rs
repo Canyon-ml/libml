@@ -1,14 +1,21 @@
 
 use ndarray::{Array, Dimension, Zip};
 
-/// Sin Operator
+/// # Sin Operator
 /// 
 /// ONNX definition: https://onnx.ai/onnx/operators/onnx__Cos.html#cos
 /// 
-/// Performs the operation b = cos(a)
+/// ## Summary
 /// 
-/// - A: Input
-/// - B: Output 
+/// Calculates the cosine of the given input tensor, element-wise.
+/// 
+/// ## Inputs
+/// 
+/// - A: Input Tensor
+/// 
+/// ## Outputs
+/// 
+/// - B: Output Tensor
 pub fn cos<D>(
     a: &Array<f32, D>,
     b: &mut Array<f32, D>,

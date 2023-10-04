@@ -5,10 +5,17 @@ use ndarray::{Array, Dimension, Zip};
 /// 
 /// ONNX definition: https://onnx.ai/onnx/operators/onnx__Div.html#div
 /// 
-/// Performs the operation C = A / B
+/// ## Summary
+/// 
+/// Performs element-wise binary division 
+/// 
+/// ## Inputs
 /// 
 /// - A: Dividend
 /// - B: Divisor
+/// 
+/// ## Outputs
+/// 
 /// - C: Quotient
 #[inline]
 pub fn div<D>(

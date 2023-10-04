@@ -1,15 +1,22 @@
 
 use ndarray::{Array, Dimension, Zip};
 
-/// # Add Function
+/// # Add Operator
 /// 
 /// ONNX Definition: https://onnx.ai/onnx/operators/onnx__Add.html#add
 /// 
-/// Performs the operation C = A + B. 
+/// ## Summary
 /// 
-/// - A: Input Array
-/// - B: Input Array
-/// - C: Output Array
+/// Performs element-wise binary addition.
+/// 
+/// ## Inputs
+/// 
+/// - A: First Operand
+/// - B: Second Operand
+/// 
+/// ## Outputs
+/// 
+/// - C: Result
 #[inline]
 pub fn add<D>(
     a: &Array<f32, D>,
@@ -33,7 +40,7 @@ where
 /// avoid confusion.  See the documentation for more details.
 #[inline]
 pub fn add_wrt_a<D>(
-    g: &mut Array<f32, D>,
+    _g: &mut Array<f32, D>,
 )
 where
     D: Dimension,

@@ -1,6 +1,7 @@
 
 \documentclass{article}
 \usepackage{amsmath}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}
 \title{ML Operators}
 \author{LibML Team}
 \date{10/1/2023}
@@ -15,7 +16,7 @@
             \item Michael Percy
         \end{itemize}
     \section*{Introduction}
-        This document formally defines the operators libml implements and their gradients. 
+        This document formally defines the operators libml implements and their gradients.  
 
 \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
     \section{Add}
@@ -35,6 +36,32 @@
         $$\frac{\delta}{\delta{v}}(u + v) = \frac{\delta{u}}{\delta{v}} + \frac{\delta{v}}{\delta{v}} = 1$$
 
         Therefore, we can say that the gradient w.r.t u is 1, and the gradient w.r.t v is 1.
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    \section{Batch Norm}
+        The Batch Normalization Operator is "...a technique to provide any layer in a neural network with inputs that are zero mean/unit
+        variance..".  In practice, this helps neural networks converge faster. The Batch Norm function is defined as follows:
+        $$\overrightarrow{y} \leftarrow \boldsymbol{BN}_{\gamma, \beta}(\overrightarrow{x})$$
+        Batch Norm is an operation over a vector.  If X is an M x N Matrix, and Y is an M x N matrix, $\boldsymbol{BN}$ is an operation
+        over the features of X, which is usually (as in our case), the columns, or the N dimension. The rows, 
+        or the M dimension, are the batches. For our purposes, 
+        we will treat the $\boldsymbol{BN}$ function as a matrix operation. The $\gamma$ (gamma) and $\beta$ (beta) symbols 
+        are trainable parameters with size Nx1, one parameter per feature.
+    \subsection{Definition}
+        First, we will define $\mu$, which is an N x 1 vector that is the mean of each feature. In plain english, each element of
+        $\mu$ is equal to the sum of feature $i$ in each batch $j$ in X divided by M. 
+        $$\sum_{i=0}^{n} \mu_i = \frac{1}{m} \sum_{j=0}^{m} X_{ij}$$
+        Next, we will define $\sigma$, which is an N x 1 vector that is the variance of each feature.
+        $$\sum_{i=0}^{n} \sigma_i = \frac{1}{m} \sum_{j=0}^{m} (X_{ij} - \mu_i)^2$$
+        Next, we will normalize $X$ into $\hat{X}$.
+        $$\sum_{i=0}^{n} \sum_{j=0}^{m} \hat{X}_{ij} = \frac{X_{ij} - \mu_i}{\sqrt{\sigma_i + \epsilon}}$$
+        Lastly, we will scale and shift according to $\gamma$ and $\beta$ to get $Y$. 
+        $$\sum_{i=0}^{n} \sum_{j=0}^{m} Y_{ij} = \gamma_i\hat{X_{ij}} + \beta_i$$
+    \subsection{Gradient}
+        I'm not sure how to write this elegantly, so I'm linking a source below. 
+
+        \href{https://kratzert.github.io/2016/02/12/understanding-the-gradient-flow-through-the-batch-normalization-layer.html}{link
+        to in-depth explanation of batch norm gradient by Frederik Kratzert}
 
 \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
     \section{Cos}

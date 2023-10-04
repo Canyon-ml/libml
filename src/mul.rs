@@ -5,10 +5,17 @@ use ndarray::{Array, Dimension, Zip};
 /// 
 /// ONNX definition: https://onnx.ai/onnx/operators/onnx__Mul.html#mul
 /// 
-/// Performs the operation C = A * B
+/// ## Summary
+/// 
+/// Performs element-wise binary multiplication.
+/// 
+/// ## Inputs
 /// 
 /// - A: Factor
 /// - B: Factor
+/// 
+/// ## Outputs
+/// 
 /// - C: Product
 #[inline]
 pub fn mul<D>(

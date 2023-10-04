@@ -1,4 +1,10 @@
 
+mod abs;
+pub use abs::{
+    abs,
+    abs_wrt_a,
+};
+
 mod add;
 pub use add::{
     add,
@@ -36,7 +42,6 @@ pub use mul::{
     mul_wrt_a,
     mul_wrt_b,
 };
-
 
 mod relu;
 pub use relu::{

@@ -17,13 +17,13 @@ pub fn max_pool(
 ) {
     let padded = pad_with_zeros(a, vec![padx, pady, 0, 0]);
 
-    
+    todo!()
 }
 
 pub fn max_pool_wrt_a(
 
 ) {
-    
+    todo!()
 }
 
 /// Pad the edges of an array with zeros.

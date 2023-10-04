@@ -5,10 +5,17 @@ use ndarray::{Array, Dimension, Zip};
 /// 
 /// ONNX definition: https://onnx.ai/onnx/operators/onnx__Relu.html#relu
 /// 
-/// Performs the operation Bi = if Ai > 0 { Ai } else { 0 }
+/// ## Summary
 /// 
-/// - A: Input Array
-/// - B: Output Array
+/// Performs the element-wise operation f(x) = max(0, x)
+/// 
+/// ## Inputs
+/// 
+/// - A: Input 
+/// 
+/// ## Outputs
+/// 
+/// - B: Output 
 #[inline]
 pub fn relu<D>(
     a: &Array<f32, D>, 

@@ -5,9 +5,16 @@ use ndarray::{Array, Dimension, Zip};
 /// 
 /// ONNX definition: https://onnx.ai/onnx/operators/onnx__Sin.html#sin
 /// 
-/// Performs the operation b = sin(a)
+/// ## Summary
+/// 
+/// Performs the operation f(x) = sin(x) element-wise.
+/// 
+/// ## Inputs
 /// 
 /// - A: Input
+/// 
+/// ## Outputs
+/// 
 /// - B: Output 
 pub fn sin<D>(
     a: &Array<f32, D>,

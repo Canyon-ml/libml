@@ -1,17 +1,21 @@
 
 # LibML
 
-LibML is a thorougly documented, rigorously tested, implementation of ONNX operators for machine learning and
-their derivatives.  LibML makes it easy to implement highly performant, correct Machine Learning APIs.  LibML doesn't care how you implement your API, it just provides the math. 
+LibML is a thorougly documented, rigorously tested, high-performance implementation of ONNX operators for machine learning and
+their derivatives. As the quantity and complexity of operators continues to grow, we need to create ways to manage that complexity. Libml solves this problem by being _very_ explicit about the inner workings of its functions, and following _consistent_ design patterns so you can be certain your code will behave the way you want it to.  Rust is the perfect candidate for such a library, with its strong static typing, borrow / mutability restraints, and documentation features. 
 
 Note: LibML is currently in very early development and should not be used in production.
 
 ## Goals
 
-- [ ] Implement every ONNX operator
+- [ ] Implement major ONNX Operators
 - [ ] Support CPU and GPU 
-- [ ] Provide formal proofs and definitions for each operator
-- [ ] Write benchmarks for each operator
+- [ ] Provide formal proofs and definitions for operators.
+- [ ] Write benchmarks for each operator and maximize performance
+
+## Short-term goals
+
+Make sure every operator is _working_ before optimizing for performance. 
 
 ## Contribution
 

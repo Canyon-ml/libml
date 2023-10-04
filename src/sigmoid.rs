@@ -5,10 +5,17 @@ use ndarray::{Array, Dimension, Zip};
 /// 
 /// ONNX definition: https://onnx.ai/onnx/operators/onnx__Sigmoid.html#sigmoid
 /// 
-/// Computes Bi = 1. / (1. + e^-Ai).
+/// ## Summary
 /// 
-/// - A: The Input Array
-/// - B: The Output Array
+/// Computes f(x) = 1. / (1. + e^-x) element-wise.
+/// 
+/// ## Inputs
+/// 
+/// - A: Input
+/// 
+/// ## Outputs
+/// 
+/// - B: Output
 #[inline]
 pub fn sigmoid<D>(
     a: &Array<f32, D>,
