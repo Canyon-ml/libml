@@ -5,9 +5,9 @@ use ndarray::{Array, Ix2};
 /// 
 /// ONNX Definition: https://onnx.ai/onnx/operators/onnx__MatMul.html#matmul
 /// 
-/// Performs the operation C = A matmul B.
+/// Performs Matrix product. 
 /// 
-/// - A: Input 
+/// - A: Input
 /// - B: Input 
 /// - C: Output 
 /// 

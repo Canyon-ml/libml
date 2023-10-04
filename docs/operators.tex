@@ -16,7 +16,8 @@
             \item Michael Percy
         \end{itemize}
     \section*{Introduction}
-        This document formally defines the operators libml implements and their gradients.  
+        This document formally defines the operators libml implements and their gradients. Tensors are assumed to conform to either
+        the NHCW or NCHW format, where N is batch size, H is features, C is channels, and W is width. 
 
 \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
     \section{Add}
@@ -129,6 +130,14 @@
         $$\frac{\delta}{\delta{v}}(uv) = v\frac{\delta{u}}{\delta{v}} + u\frac{\delta{u}}{\delta{u}} = v\frac{0}{\delta{v}} + u = u$$
 
         Therefore, we can say that the gradient w.r.t u is v, and the gradient w.r.t v is u. 
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    \section{Reduce Mean}
+        The Reduce Mean Operator will remove an axis of an input Tensor X, and calculate the sum of the removed axis. Assuming that
+        the input X is an NxH Matrix and output Y is an 1xH Vector, and we are removing the N-axis, we can define 
+        the operation for a single element of Y as: 
+        $$Y_j = \frac{1}{N} \sum_{i=0}^{N} X_{ij}$$
+        Since summations are linear, we can conclude the gradient w.r.t. any $X_{ij}$ is $\frac{1}{N}$.
 
 \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
     \section{Relu}

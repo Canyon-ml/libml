@@ -19,6 +19,7 @@ use ndarray::{Array, Zip, Ix2, Ix1};
 /// - in_var: (N x 1) Variance of X on the X-axis.
 /// 
 /// - running_mean: 
+#[inline]
 pub fn batch_norm(
     x: &Array<f32, Ix2>,
     scale: &Array<f32, Ix1>,

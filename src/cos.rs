@@ -16,6 +16,7 @@ use ndarray::{Array, Dimension, Zip};
 /// ## Outputs
 /// 
 /// - B: Output Tensor
+#[inline]
 pub fn cos<D>(
     a: &Array<f32, D>,
     b: &mut Array<f32, D>,
@@ -36,6 +37,7 @@ where
 /// - B: Gradient
 /// 
 /// A _must_ be the A used in the forward operation. 
+#[inline]
 pub fn cos_wrt_a<D>(
     a: &Array<f32, D>,
     g: &mut Array<f32, D>,

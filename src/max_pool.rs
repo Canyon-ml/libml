@@ -66,11 +66,11 @@ where
     padded
 }
 
-#[test]
-fn stuff() {
-    let a = Array::from_shape_vec((4, 4), vec![1., 2., 3., 4., 5., 6. ,7., 8., 9., 10., 11., 12., 13., 14., 15., 16.]).unwrap();
+// #[test]
+// fn stuff() {
+//     let a = Array::from_shape_vec((4, 4), vec![1., 2., 3., 4., 5., 6. ,7., 8., 9., 10., 11., 12., 13., 14., 15., 16.]).unwrap();
 
-    let s = a.slice(s![2..4, 2..4]);
+//     let s = a.slice(s![2..4, 2..4]);
 
-    panic!("{}, \n \n {}", a, s);
-}
+//     panic!("{}, \n \n {}", a, s);
+// }

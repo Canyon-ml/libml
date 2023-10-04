@@ -43,6 +43,12 @@ pub use mul::{
     mul_wrt_b,
 };
 
+mod reduce_sum;
+pub use reduce_sum::reduce_sum;
+
+mod reduce_mean;
+pub use reduce_mean::reduce_mean;
+
 mod relu;
 pub use relu::{
     relu, 

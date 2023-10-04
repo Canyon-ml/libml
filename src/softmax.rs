@@ -10,6 +10,7 @@ use ndarray_stats::QuantileExt;
 /// 
 /// - A: Input 
 /// - B: Output 
+#[inline]
 pub fn softmax(
     a: &Array<f32, Ix2>,
     b: &mut Array<f32, Ix2>,
@@ -48,6 +49,7 @@ pub fn softmax(
 /// - G: Gradient 
 /// 
 /// B _must_ be the output of the forward op.
+#[inline]
 pub fn softmax_wrt_a(
     b: &Array<f32, Ix2>,
     g: &mut Array<f32, Ix2>,
